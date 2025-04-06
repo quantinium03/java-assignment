@@ -153,11 +153,11 @@ public class QuizBowl {
         loadQuestionsRec(fileContents);
     }
 
-    int getTotalQuestions() {
+    private int getTotalQuestions() {
         return questions.size();
     }
 
-    int handleValidQuestion(int total) {
+    private int handleValidQuestion(int total) {
         int val = 0;
         if (scanner.hasNextInt()) {
             val = scanner.nextInt();
