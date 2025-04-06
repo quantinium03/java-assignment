@@ -62,4 +62,4 @@ B
 TF
 16
 In Rust, the ownership of a value can be transferred from one variable to another, but after the transfer, the original variable is still valid and can be used.
-true
+false

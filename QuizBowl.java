@@ -103,6 +103,7 @@ public class QuizBowl {
     public static final String RED = "\u001B[31m";
     public static final String GREEN = "\u001B[32m";
     public static final String CYAN = "\u001B[36m";
+    public static final String YELLOW = "\u001B[33m";
 
     public QuizBowl() {
         questions = new ArrayList<>();
@@ -197,7 +198,7 @@ public class QuizBowl {
                             "points\n" + RESET);
                 }
             } else {
-                System.out.println("Skipped Question");
+                System.out.println(YELLOW + "Skipped Question. You get 0 points.\n" + RESET);
             }
         });
 
