@@ -1,0 +1,65 @@
+TF
+5
+Rust is a programming language that guarantees memory safety by using a borrow checker.
+true
+
+SA
+10
+What would be the output of this in JavaScript: [1] + [2]?
+12
+
+TF
+8
+Can you define multiple constructors for a struct in Rust?
+false
+
+MC
+12
+Which of the following Python statements will raise an error?
+print("Hello, World!")
+x = [1, 2, 3]; x[1] = 10
+y = (1, 2, 3); y[1] = 4
+z = {1: "a", 2: "b"}; del z[2]
+C
+
+TF
+7
+In JavaScript, using the localStorage API to store a user's authentication token will persist the token even after the browser is closed.
+true
+
+MC
+10
+Which of the following describes the type of memory allocated by malloc in C?
+Stack memory
+Heap memory
+Static memory
+Register memory
+B
+
+SA
+12
+What is the term for Go's built-in feature that ensures safe and efficient communication between goroutines?
+Channel
+
+MC
+15
+What would be the type of the following expression in JavaScript? `typeof ({} + []);`
+object
+string
+undefined
+boolean
+B
+
+MC
+12
+In Python, which of the following is used to implement a custom iterator?
+__getitem__
+__iter__ and __next__
+__call__
+__init__
+B
+
+TF
+16
+In Rust, the ownership of a value can be transferred from one variable to another, but after the transfer, the original variable is still valid and can be used.
+true
