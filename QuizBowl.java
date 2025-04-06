@@ -67,7 +67,7 @@ class QuestionMC extends Question {
     final private ArrayList<String> choices;
 
     public QuestionMC(String question, int pts, ArrayList<String> choices,
-                      String ans) {
+            String ans) {
         super(question, pts, ans);
         this.choices = choices;
     }
@@ -75,7 +75,7 @@ class QuestionMC extends Question {
     @Override
     void displayQuestion() {
         System.out.println("Question: " + question);
-        IntStream.range(0, choices.size()).forEach(i -> System.out.println((char)('A' + i) + ". " + choices.get(i)));
+        IntStream.range(0, choices.size()).forEach(i -> System.out.println((char) ('A' + i) + ". " + choices.get(i)));
     }
 }
 
@@ -109,6 +109,7 @@ public class QuizBowl {
         questions = new ArrayList<>();
         scanner = new Scanner(System.in);
     }
+
     private void loadQuestion() throws FileNotFoundException {
         Scanner fileContents = new Scanner(new File(fileName));
         loadQuestionsRec(fileContents);
@@ -116,12 +117,12 @@ public class QuizBowl {
     }
 
     private void loadQuestionsRec(Scanner fileContents) {
-        if(!fileContents.hasNextLine()) {
+        if (!fileContents.hasNextLine()) {
             return;
         }
 
         String quesType = fileContents.nextLine().trim();
-        if(quesType.isEmpty()) {
+        if (quesType.isEmpty()) {
             loadQuestionsRec(fileContents);
             return;
         }
@@ -146,7 +147,7 @@ public class QuizBowl {
             }
         }
 
-        if(fileContents.hasNextLine()) {
+        if (fileContents.hasNextLine()) {
             fileContents.nextLine();
         }
         loadQuestionsRec(fileContents);
@@ -154,6 +155,23 @@ public class QuizBowl {
 
     int getTotalQuestions() {
         return questions.size();
+    }
+
+    int handleValidQuestion(int total) {
+        int val = 0;
+        if (scanner.hasNextInt()) {
+            val = scanner.nextInt();
+            scanner.nextLine();
+            if (val < 1 || val > total) {
+                System.out.println("Please enter a number between 1 and " + total + ": ");
+                return handleValidQuestion(total);
+            }
+        } else {
+            System.out.println("Please enter a valid integer value: ");
+            scanner.next();
+            return handleValidQuestion(total);
+        }
+        return val;
     }
 
     public void runGame() {
@@ -172,12 +190,7 @@ public class QuizBowl {
 
         System.out.println("How many questions do you want to answer: " +
                 "(max: 10)");
-        int questionToAnswer = Integer.parseInt(scanner.nextLine().trim());
-
-        if(questionToAnswer > totalQuestions) {
-            System.out.println("Please provide a number smaller than " + totalQuestions);
-            return;
-        }
+        int questionToAnswer = handleValidQuestion(totalQuestions);
 
         Collections.shuffle(questions);
         IntStream.range(0, questionToAnswer).forEach(i -> {
@@ -187,8 +200,8 @@ public class QuizBowl {
             question.displayQuestion();
             String ans = scanner.nextLine();
 
-            if(!ans.equalsIgnoreCase("SKIP")) {
-                if(question.validAnswer(ans)) {
+            if (!ans.equalsIgnoreCase("SKIP")) {
+                if (question.validAnswer(ans)) {
                     player.addPoints(question.getPoints());
                     System.out.println(GREEN + "Correct! You get " + question.getPoints() + " points.\n" + RESET);
                 } else {
@@ -205,7 +218,7 @@ public class QuizBowl {
         System.out.println("Game Over");
         System.out.printf("%s. Your final score is %d\n",
                 player.getPlayerName(), player.getPoints());
-        if(player.getPoints() < 0) {
+        if (player.getPoints() < 0) {
             System.out.println("Better luck next time");
         }
     }
