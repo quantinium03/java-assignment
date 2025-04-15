@@ -4,44 +4,44 @@ import java.util.*;
 import java.util.stream.IntStream;
 
 class Player {
-    final private String playerName;
-    private int points;
+    final private String name;
+    private int score;
 
     public Player(String name) {
-        this.playerName = name;
-        this.points = 0;
+        this.name = name;
+        this.score = 0;
     }
 
-    public void addPoints(int point) {
-        this.points += point;
+    public void addScore(int point) {
+        this.score += point;
     }
 
-    public void subtractPoints(int point) {
-        this.points -= point;
+    public void subtractScore(int point) {
+        this.score -= point;
     }
 
-    public int getPoints() {
-        return this.points;
+    public int getScore() {
+        return this.score;
     }
 
     public String getPlayerName() {
-        return this.playerName;
+        return this.name;
     }
 }
 
 abstract class Question {
     protected String question;
-    protected int points;
+    protected int score;
     protected String validAns;
 
     public Question(String question, int pts, String ans) {
         this.question = question;
-        this.points = pts;
+        this.score = pts;
         this.validAns = ans;
     }
 
-    public int getPoints() {
-        return points;
+    public int getScore() {
+        return score;
     }
 
     boolean validAnswer(String ans) {
@@ -196,16 +196,16 @@ public class QuizBowl {
         IntStream.range(0, questionToAnswer).forEach(i -> {
             Question question = questions.get(i);
 
-            System.out.println(CYAN + "Points: " + player.getPoints() + RESET);
+            System.out.println(CYAN + "Points: " + player.getScore() + RESET);
             question.displayQuestion();
             String ans = scanner.nextLine();
 
             if (!ans.equalsIgnoreCase("SKIP")) {
                 if (question.validAnswer(ans)) {
-                    player.addPoints(question.getPoints());
-                    System.out.println(GREEN + "Correct! You get " + question.getPoints() + " points.\n" + RESET);
+                    player.addScore(question.getScore());
+                    System.out.println(GREEN + "Correct! You get " + question.getScore() + " points.\n" + RESET);
                 } else {
-                    player.subtractPoints(PENALTY_POINTS);
+                    player.subtractScore(PENALTY_POINTS);
                     System.out.println(RED + "Incorrect! You loose " + PENALTY_POINTS +
                             " " +
                             "points\n" + RESET);
@@ -217,8 +217,8 @@ public class QuizBowl {
 
         System.out.println("Game Over");
         System.out.printf("%s. Your final score is %d\n",
-                player.getPlayerName(), player.getPoints());
-        if (player.getPoints() < 0) {
+                player.getPlayerName(), player.getScore());
+        if (player.getScore() < 0) {
             System.out.println("Better luck next time");
         }
     }
